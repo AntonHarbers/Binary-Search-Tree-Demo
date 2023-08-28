@@ -88,6 +88,21 @@ class Tree {
     }
     return node;
   }
+
+  find(value){
+    let currentNode = this.root;
+    while (currentNode) {
+      if (value === currentNode.value) {
+        return currentNode;
+      }
+      if (value < currentNode.value) {
+        currentNode = currentNode.left;
+      } else {
+        currentNode = currentNode.right;
+      }
+    }
+    return null;
+  }
 }
 
 // helper function to print the tree in the console, taken from the odin project assignment
@@ -110,6 +125,7 @@ tree.delete(4);
 tree.delete(10);
 tree.delete(20);
 prettyPrint(tree.root);
+console.log(tree.find(50));
 
 // exporting for testing purposes
 module.exports = { Node, Tree };
