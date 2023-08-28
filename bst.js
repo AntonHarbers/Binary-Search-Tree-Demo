@@ -30,6 +30,64 @@ class Tree {
 
     return rootNode;
   }
+
+  insert(value) {
+    if (!this.root) {
+      this.root = new Node(value);
+      return;
+    }
+
+    let currentNode = this.root;
+    while (true) {
+      if (value < currentNode.value) {
+        if (!currentNode.left) {
+          currentNode.left = new Node(value);
+          return;
+        }
+        currentNode = currentNode.left;
+      } else {
+        if (!currentNode.right) {
+          currentNode.right = new Node(value);
+          return;
+        }
+        currentNode = currentNode.right;
+      }
+    }
+  }
+
+  delete(value) {
+    this.root = this.deleteNode(this.root, value);
+  }
+
+  deleteNode(root, value) {
+    if (!root) return null;
+
+    if (value < root.value) {
+      root.left = this.deleteNode(root.left, value);
+    } else if (value > root.value) {
+      root.right = this.deleteNode(root.right, value);
+    } else {
+      // Node to be deleted found
+      if (!root.left) {
+        return root.right;
+      } else if (!root.right) {
+        return root.left;
+      }
+
+      const minNode = this.findMinNode(root.right);
+      root.value = minNode.value;
+      root.right = this.deleteNode(root.right, minNode.value);
+    }
+
+    return root;
+  }
+
+  findMinNode(node) {
+    while (node.left) {
+      node = node.left;
+    }
+    return node;
+  }
 }
 
 // helper function to print the tree in the console, taken from the odin project assignment
@@ -47,7 +105,10 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 
 // example usage
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+const tree = new Tree([3, 5, 4, 10, 20]);
+tree.delete(4);
+tree.delete(10);
+tree.delete(20);
 prettyPrint(tree.root);
 
 // exporting for testing purposes
