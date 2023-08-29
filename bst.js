@@ -89,7 +89,7 @@ class Tree {
     return node;
   }
 
-  find(value){
+  find(value) {
     let currentNode = this.root;
     while (currentNode) {
       if (value === currentNode.value) {
@@ -102,6 +102,70 @@ class Tree {
       }
     }
     return null;
+  }
+
+  levelOrder(callback = null) {
+    if (!this.root) {
+      return [];
+    }
+
+    const result = [];
+    const queue = [this.root];
+
+    while (queue.length > 0) {
+      const currentNode = queue.shift();
+
+      if (callback) {
+        callback(currentNode);
+      } else {
+        result.push(currentNode.value);
+      }
+
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+    }
+
+    return result;
+  }
+
+  levelOrderRecursive(callback = null) {
+    if (!this.root) {
+      return [];
+    }
+
+    const result = [];
+    const queue = [this.root];
+
+    const traverse = () => {
+      if (queue.length === 0) {
+        return;
+      }
+
+      const currentNode = queue.shift();
+
+      if (callback) {
+        callback(currentNode);
+      } else {
+        result.push(currentNode.value);
+      }
+
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+
+      traverse();
+    };
+
+    traverse();
+
+    return result;
   }
 }
 
@@ -120,12 +184,11 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 
 // example usage
-const tree = new Tree([3, 5, 4, 10, 20]);
-tree.delete(4);
-tree.delete(10);
-tree.delete(20);
+const tree = new Tree([10,20,30,40,50]);
 prettyPrint(tree.root);
-console.log(tree.find(50));
+tree.levelOrder((x) => console.log(x.value));
+//console.log("Hello")
+//tree.levelOrderRecursive((x) => console.log(x.value));
 
 // exporting for testing purposes
 module.exports = { Node, Tree };
