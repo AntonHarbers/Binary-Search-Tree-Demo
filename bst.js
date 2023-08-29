@@ -333,7 +333,16 @@ class Tree {
     return result;
   }
 
-  height(node = this.root) {}
+  height(node = this.root) {
+    if (!node) {
+      return 0;
+    }
+
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
 
   depth(node = this.root) {}
 
@@ -357,9 +366,9 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 
 // example usage
-const tree = new Tree([3, 5, 4, 10, 20]);
+const tree = new Tree([10, 20, 30, 40, 50]);
 prettyPrint(tree.root);
-console.log(tree.postOrderRecursive());
+console.log(tree.height());
 
 // exporting for testing purposes
 module.exports = { Node, Tree };

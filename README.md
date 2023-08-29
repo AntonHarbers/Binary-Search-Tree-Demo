@@ -1,7 +1,4 @@
 # odin-binary-search-tree
-
-Write inorder, preorder, and postorder functions that accept a function parameter. Each of these functions should traverse the tree in their respective depth-first order and yield each node to the provided function given as an argument. The functions should return an array of values if no function is given.
-
 Write a height function which accepts a node and returns its height. Height is defined as the number of edges in longest path from a given node to a leaf node.
 
 Write a depth function which accepts a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node.

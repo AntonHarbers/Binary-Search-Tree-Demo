@@ -223,16 +223,16 @@ describe('Tree', () => {
     });
   });
 
-//   describe('#height', () => {
-//     test('Should return the height of the tree', () => {
-//       const tree = new Tree([10, 20, 30, 40, 50]);
-//       expect(tree.height()).toBe(2);
-//     });
-//     test('Should return 0 if the tree is empty', () => {
-//       const tree = new Tree([]);
-//       expect(tree.height()).toBe(0);
-//     });
-//   });
+  describe('#height', () => {
+    test('Should return the height of the tree', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      expect(tree.height()).toBe(3);
+    });
+    test('Should return 0 if the tree is empty', () => {
+      const tree = new Tree([]);
+      expect(tree.height()).toBe(0);
+    });
+  });
 
 //   describe('#depth', () => {
 //     test('Should return the depth of the tree', () => {
