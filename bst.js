@@ -309,24 +309,24 @@ class Tree {
   }
 
   postOrderRecursive(callback = null) {
-    if(!this.root){
+    if (!this.root) {
       return [];
     }
 
     const result = [];
     const traverse = (node) => {
-      if(node.left){
+      if (node.left) {
         traverse(node.left);
       }
-      if(node.right){
+      if (node.right) {
         traverse(node.right);
       }
-      if(callback){
+      if (callback) {
         callback(node);
       } else {
         result.push(node.value);
       }
-    }
+    };
 
     traverse(this.root);
 
@@ -344,11 +344,42 @@ class Tree {
     return Math.max(leftHeight, rightHeight) + 1;
   }
 
-  depth(node = this.root) {}
+  depth(node = this.root) {
+    if (!node) {
+      return 0;
+    }
 
-  isBalanced() {}
+    const leftDepth = this.depth(node.left);
+    const rightDepth = this.depth(node.right);
 
-  rebalance() {}
+    return Math.max(leftDepth, rightDepth) + 1;
+  }
+
+  //Write a isBalanced function which checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
+  isBalanced(node = this.root) {
+    if (!node) {
+      return true;
+    }
+
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.isBalanced(node.left) &&
+      this.isBalanced(node.right)
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  rebalance() {
+    const values = this.inOrder();
+    const newTree = new Tree(values);
+    return newTree;
+  }
 }
 
 // helper function to print the tree in the console, taken from the odin project assignment
@@ -365,10 +396,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-// example usage
-const tree = new Tree([10, 20, 30, 40, 50]);
-prettyPrint(tree.root);
-console.log(tree.height());
 
 // exporting for testing purposes
-module.exports = { Node, Tree };
+module.exports = { Node, Tree, prettyPrint };

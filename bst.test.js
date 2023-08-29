@@ -1,7 +1,5 @@
-const { Node } = require('./bst');
 const { Tree } = require('./bst');
 
-// testing the tree class
 describe('Tree', () => {
   describe('#buildTree', () => {
     test('should build a balanced binary search tree and return the correct root value', () => {
@@ -234,39 +232,46 @@ describe('Tree', () => {
     });
   });
 
-//   describe('#depth', () => {
-//     test('Should return the depth of the tree', () => {
-//       const tree = new Tree([10, 20, 30, 40, 50, 60, 70, 80]);
-//       expect(tree.depth()).toBe(3);
-//     });
-//     test('Should return 0 if the tree is empty', () => {
-//       const tree = new Tree([]);
-//       expect(tree.depth()).toBe(0);
-//     });
-//   });
+  describe('#depth', () => {
+    test('Should return the depth of the tree', () => {
+      const tree = new Tree([10, 20, 30, 40, 50, 60, 70, 80]);
+      expect(tree.depth()).toBe(4);
+    });
+    test('Should return 0 if the tree is empty', () => {
+      const tree = new Tree([]);
+      expect(tree.depth()).toBe(0);
+    });
+  });
 
-//   describe('#isBalanced', () => {
-//     test('Should return true if the tree is balanced', () => {
-//       const tree = new Tree([10, 20, 30, 40, 50]);
-//       expect(tree.isBalanced()).toBe(true);
-//     });
-//     test('Should return false if the tree is not balanced', () => {
-//       const tree = new Tree([10, 20, 30, 40, 50, 60, 70, 80]);
-//       expect(tree.isBalanced()).toBe(false);
-//     });
-//   });
+  describe('#isBalanced', () => {
+    test('Should return true if the tree is balanced', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      expect(tree.isBalanced()).toBe(true);
+    });
+    test('Should return false if the tree is not balanced', () => {
+      const tree = new Tree([
+        10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 1000, 1100, 1200,
+      ]);
+      tree.insert(25);
+      tree.insert(27);
+      expect(tree.isBalanced()).toBe(false);
+    });
+  });
 
-//   describe('#rebalance', () => {
-//     test('Should rebalance the tree', () => {
-//       const tree = new Tree([10, 20, 30, 40, 50, 60, 70, 80]);
-//       tree.rebalance();
-//       expect(tree.isBalanced()).toBe(true);
-//     });
-
-//     test('Should not rebalance the tree if it is already balanced', () => {
-//       const tree = new Tree([10, 20, 30, 40, 50]);
-//       tree.rebalance();
-//       expect(tree.isBalanced()).toBe(true);
-//     });
-//   });
+  describe('#rebalance', () => {
+    test('Should rebalance the tree', () => {
+      const tree = new Tree([
+        10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 1000, 1100, 1200,
+      ]);
+      tree.insert(25);
+      tree.insert(27);
+      tree.rebalance();
+      expect(tree.rebalance().isBalanced()).toBe(true);
+    });
+    test('Should not rebalance the tree if it is already balanced', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      tree.rebalance();
+      expect(tree.isBalanced()).toBe(true);
+    });
+  });
 });
