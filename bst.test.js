@@ -104,10 +104,162 @@ describe('Tree', () => {
     });
 
     test('Should return an array of values if no function is provided', () => {
-        const tree = new Tree([10, 20, 30, 40, 50]);
-        const result = tree.levelOrderRecursive();
-    
-        expect(result).toEqual([30, 20, 50, 10, 40]);
-        });
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      const result = tree.levelOrderRecursive();
+
+      expect(result).toEqual([30, 20, 50, 10, 40]);
+    });
+  });
+
+  describe('#inOrder', () => {
+    test('Should perform in-order traversal on the tree using iteration', () => {
+      const tree = new Tree([3, 5, 4, 10, 20]);
+      const result = [];
+      tree.inOrder((value) => {
+        result.push(value.value);
+      });
+
+      expect(result).toEqual([3, 4, 5, 10, 20]);
+    });
+
+    test('Should return an array of values if no function is provided', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      const result = tree.inOrder();
+
+      expect(result).toEqual([10, 20, 30, 40, 50]);
+    });
+  });
+
+  describe('#inOrderRecursive', () => {
+    test('Should perform in-order traversal on the tree using recursion', () => {
+      const tree = new Tree([3, 5, 4, 10, 20]);
+      const result = [];
+      tree.inOrderRecursive((value) => {
+        result.push(value.value);
+      });
+
+      expect(result).toEqual([3, 4, 5, 10, 20]);
+    });
+
+    test('Should return an array of values if no function is provided', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      const result = tree.inOrderRecursive();
+
+      expect(result).toEqual([10, 20, 30, 40, 50]);
+    });
+  });
+
+  describe('#preOrder', () => {
+    test('Should perform pre-order traversal on the tree using iteration', () => {
+      const tree = new Tree([3, 5, 4, 10, 20]);
+      const result = [];
+      tree.preOrder((value) => {
+        result.push(value.value);
+      });
+
+      expect(result).toEqual([5, 3, 4, 20, 10]);
+    });
+
+    test('Should return an array of values if no function is provided', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      const result = tree.preOrder();
+
+      expect(result).toEqual([30, 20, 10, 50, 40]);
+    });
+  });
+
+  describe('#preOrderRecursive', () => {
+    test('Should perform pre-order traversal on the tree using recursion', () => {
+      const tree = new Tree([3, 5, 4, 10, 20]);
+      const result = [];
+      tree.preOrderRecursive((value) => {
+        result.push(value.value);
+      });
+
+      expect(result).toEqual([5, 3, 4, 20, 10]);
+    });
+    test('Should return an array of values if no function is provided', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      const result = tree.preOrderRecursive();
+
+      expect(result).toEqual([30, 20, 10, 50, 40]);
+    });
+  });
+
+  describe('#postOrder', () => {
+    test('Should perform post-order traversal on the tree using iteration', () => {
+      const tree = new Tree([3, 5, 4, 10, 20]);
+      const result = [];
+      tree.postOrder((value) => {
+        result.push(value.value);
+      });
+
+      expect(result).toEqual([3, 4, 10, 20, 5]);
+    });
+  });
+
+  describe('#postOrderRecursive', () => {
+    test('Should perform post-order traversal on the tree using recursion', () => {
+      const tree = new Tree([3, 5, 4, 10, 20]);
+      const result = [];
+      tree.postOrderRecursive((value) => {
+        result.push(value.value);
+      });
+      expect(result).toEqual([3, 4, 10, 20, 5]);
+    });
+
+    test('Should return an array of values if no function is provided', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      const result = tree.postOrderRecursive();
+
+      expect(result).toEqual([10, 20, 50, 40, 30]);
+    });
+  });
+
+  describe('#height', () => {
+    test('Should return the height of the tree', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      expect(tree.height()).toBe(2);
+    });
+    test('Should return 0 if the tree is empty', () => {
+      const tree = new Tree([]);
+      expect(tree.height()).toBe(0);
+    });
+  });
+
+  describe('#depth', () => {
+    test('Should return the depth of the tree', () => {
+      const tree = new Tree([10, 20, 30, 40, 50, 60, 70, 80]);
+      expect(tree.depth()).toBe(3);
+    });
+    test('Should return 0 if the tree is empty', () => {
+      const tree = new Tree([]);
+      expect(tree.depth()).toBe(0);
+    });
+  });
+
+  describe('#isBalanced', () => {
+    test('Should return true if the tree is balanced', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      expect(tree.isBalanced()).toBe(true);
+    });
+    test('Should return false if the tree is not balanced', () => {
+      const tree = new Tree([10, 20, 30, 40, 50, 60, 70, 80]);
+      expect(tree.isBalanced()).toBe(false);
+    });
+  });
+
+  describe('#rebalance', () => {
+    test('Should rebalance the tree', () => {
+      const tree = new Tree([10, 20, 30, 40, 50, 60, 70, 80]);
+      tree.rebalance();
+      expect(tree.isBalanced()).toBe(true);
+    });
+
+    test('Should not rebalance the tree if it is already balanced', () => {
+      const tree = new Tree([10, 20, 30, 40, 50]);
+      tree.rebalance();
+      expect(tree.isBalanced()).toBe(true);
+    });
   });
 });

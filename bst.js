@@ -167,6 +167,39 @@ class Tree {
 
     return result;
   }
+
+  inOrder(callback = null){
+
+  }
+
+  inOrderRecursive(callback = null){
+  }
+
+  preOrder(callback = null){
+  }
+
+  preOrderRecursive(callback = null){
+  }
+
+  postOrder(callback = null){
+  }
+
+  postOrderRecursive(callback = null){
+  }
+
+  height(node = this.root){
+  }
+  
+  depth(node = this.root){
+  }
+
+  isBalanced(){
+
+  }
+
+  rebalance(){
+
+  }
 }
 
 // helper function to print the tree in the console, taken from the odin project assignment
@@ -184,7 +217,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 
 // example usage
-const tree = new Tree([10,20,30,40,50]);
+const tree = new Tree([10, 20, 30, 40, 50, 60, 70, 80]);
 prettyPrint(tree.root);
 tree.levelOrder((x) => console.log(x.value));
 //console.log("Hello")
