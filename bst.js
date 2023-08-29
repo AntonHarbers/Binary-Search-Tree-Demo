@@ -168,38 +168,178 @@ class Tree {
     return result;
   }
 
-  inOrder(callback = null){
+  inOrder(callback = null) {
+    if (!this.root) {
+      return [];
+    }
 
+    const result = [];
+    const stack = [];
+    let currentNode = this.root;
+
+    while (stack.length > 0 || currentNode) {
+      if (currentNode) {
+        stack.push(currentNode);
+        currentNode = currentNode.left;
+      } else {
+        currentNode = stack.pop();
+        if (callback) {
+          callback(currentNode);
+        } else {
+          result.push(currentNode.value);
+        }
+        currentNode = currentNode.right;
+      }
+    }
+
+    return result;
   }
 
-  inOrderRecursive(callback = null){
+  inOrderRecursive(callback = null) {
+    if (!this.root) {
+      return [];
+    }
+
+    const result = [];
+    const traverse = (node) => {
+      if (node.left) {
+        traverse(node.left);
+      }
+      if (callback) {
+        callback(node);
+      } else {
+        result.push(node.value);
+      }
+      if (node.right) {
+        traverse(node.right);
+      }
+    };
+
+    traverse(this.root);
+
+    return result;
   }
 
-  preOrder(callback = null){
+  preOrder(callback = null) {
+    if (!this.root) {
+      return [];
+    }
+
+    const result = [];
+    const stack = [this.root];
+
+    while (stack.length > 0) {
+      const currentNode = stack.pop();
+      if (callback) {
+        callback(currentNode);
+      } else {
+        result.push(currentNode.value);
+      }
+      if (currentNode.right) {
+        stack.push(currentNode.right);
+      }
+      if (currentNode.left) {
+        stack.push(currentNode.left);
+      }
+    }
+
+    return result;
   }
 
-  preOrderRecursive(callback = null){
+  preOrderRecursive(callback = null) {
+    if (!this.root) {
+      return [];
+    }
+
+    const result = [];
+    const traverse = (node) => {
+      if (callback) {
+        callback(node);
+      } else {
+        result.push(node.value);
+      }
+      if (node.left) {
+        traverse(node.left);
+      }
+      if (node.right) {
+        traverse(node.right);
+      }
+    };
+
+    traverse(this.root);
+
+    return result;
   }
 
-  postOrder(callback = null){
+  postOrder(callback = null) {
+    if (!this.root) {
+      return [];
+    }
+
+    const result = [];
+    const stack = [this.root];
+    const visited = new Set();
+
+    while (stack.length > 0) {
+      const currentNode = stack[stack.length - 1];
+
+      if (
+        (!currentNode.left && !currentNode.right) || // Leaf node
+        (currentNode.left && visited.has(currentNode.left)) || // Left child visited
+        (currentNode.right && visited.has(currentNode.right)) // Right child visited
+      ) {
+        stack.pop();
+        if (callback) {
+          callback(currentNode);
+        } else {
+          result.push(currentNode.value);
+        }
+        visited.add(currentNode);
+      } else {
+        if (currentNode.right) {
+          stack.push(currentNode.right);
+        }
+        if (currentNode.left) {
+          stack.push(currentNode.left);
+        }
+      }
+    }
+
+    return result;
   }
 
-  postOrderRecursive(callback = null){
+  postOrderRecursive(callback = null) {
+    if(!this.root){
+      return [];
+    }
+
+    const result = [];
+    const traverse = (node) => {
+      if(node.left){
+        traverse(node.left);
+      }
+      if(node.right){
+        traverse(node.right);
+      }
+      if(callback){
+        callback(node);
+      } else {
+        result.push(node.value);
+      }
+    }
+
+    traverse(this.root);
+
+    return result;
   }
 
-  height(node = this.root){
-  }
-  
-  depth(node = this.root){
-  }
+  height(node = this.root) {}
 
-  isBalanced(){
+  depth(node = this.root) {}
 
-  }
+  isBalanced() {}
 
-  rebalance(){
-
-  }
+  rebalance() {}
 }
 
 // helper function to print the tree in the console, taken from the odin project assignment
@@ -217,11 +357,9 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 
 // example usage
-const tree = new Tree([10, 20, 30, 40, 50, 60, 70, 80]);
+const tree = new Tree([3, 5, 4, 10, 20]);
 prettyPrint(tree.root);
-tree.levelOrder((x) => console.log(x.value));
-//console.log("Hello")
-//tree.levelOrderRecursive((x) => console.log(x.value));
+console.log(tree.postOrderRecursive());
 
 // exporting for testing purposes
 module.exports = { Node, Tree };
