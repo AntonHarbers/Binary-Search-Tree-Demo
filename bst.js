@@ -398,4 +398,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 
 
 // exporting for testing purposes
-module.exports = { Node, Tree, prettyPrint };
+// module.exports = { Tree, prettyPrint };
+
+// exporting for visualization
+export { Tree };
