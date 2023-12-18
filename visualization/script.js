@@ -1,4 +1,4 @@
-import { Tree, prettyPrint } from '../bst.js';
+import { Tree, prettyPrint } from '../bst/bst.js';
 
 const svgElement = document.querySelector('#tree-svg');
 const addButton = document.querySelector('#add-button');
@@ -67,15 +67,6 @@ function renderTree(rootNode, svgElement) {
   if (rootNode) {
     drawNode(rootNode, svgElement.clientWidth / 2, nodeRadius);
   }
-
-  if (node.right) {
-    const rightX = x + dx;
-    const rightY = y + verticalSpacing;
-    svgElement.appendChild(
-      drawLine(x, y + nodeRadius, rightX, rightY - nodeRadius)
-    );
-    drawNode(node.right, rightX, rightY, level + 1, dx / 2);
-  }
 }
 
 function updateTree() {
@@ -105,5 +96,3 @@ updateTree();
 function randomArray(length, max) {
   return [...new Array(length)].map(() => Math.round(Math.random() * max));
 }
-
-drawTree();

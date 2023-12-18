@@ -266,7 +266,7 @@ describe('Tree', () => {
       tree.insert(25);
       tree.insert(27);
       tree.rebalance();
-      expect(tree.rebalance().isBalanced()).toBe(true);
+      expect(tree.isBalanced()).toBe(true);
     });
     test('Should not rebalance the tree if it is already balanced', () => {
       const tree = new Tree([10, 20, 30, 40, 50]);

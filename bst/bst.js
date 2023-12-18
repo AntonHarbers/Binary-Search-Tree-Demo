@@ -378,30 +378,20 @@ class Tree {
 
   rebalance() {
     const values = this.inOrder();
-    const newTree = new Tree([]); // Create a new empty tree
-  
-    const buildBalancedTree = (values) => {
-      if (values.length === 0) {
-        return null;
-      }
-  
-      const middleIndex = Math.floor(values.length / 2);
-  
-      // Recursively build the left and right subtrees
-      buildBalancedTree(values.slice(0, middleIndex));
-      
-      // Add the middle value to the new tree after building subtrees
-      newTree.insert(values[middleIndex]);
-  
-      buildBalancedTree(values.slice(middleIndex + 1));
-    };
-  
-    buildBalancedTree(values);
-  
-    return newTree;
-}
+    this.root = this.buildBalancedTree(values, 0, values.length - 1);
+  }
 
-  
+  buildBalancedTree(values, start, end) {
+    if (start > end) return null;
+
+    const middleIndex = Math.floor((start + end) / 2);
+    const node = new Node(values[middleIndex]);
+
+    node.left = this.buildBalancedTree(values, start, middleIndex - 1);
+    node.right = this.buildBalancedTree(values, middleIndex + 1, end);
+
+    return node;
+  }
 }
 
 // helper function to print the tree in the console, taken from the odin project assignment
@@ -417,7 +407,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
 };
-
 
 // exporting for testing purposes
 // module.exports = { Tree, prettyPrint };
