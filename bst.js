@@ -10,6 +10,7 @@ class Tree {
   constructor(array) {
     // sort the array and remove and duplicate values first
     const sortedAndUniqueArray = [...new Set(array.sort((a, b) => a - b))];
+    console.log(sortedAndUniqueArray);
     // then build the tree and set the root node
     this.root = this.buildTree(sortedAndUniqueArray);
   }
@@ -377,9 +378,30 @@ class Tree {
 
   rebalance() {
     const values = this.inOrder();
-    const newTree = new Tree(values);
+    const newTree = new Tree([]); // Create a new empty tree
+  
+    const buildBalancedTree = (values) => {
+      if (values.length === 0) {
+        return null;
+      }
+  
+      const middleIndex = Math.floor(values.length / 2);
+  
+      // Recursively build the left and right subtrees
+      buildBalancedTree(values.slice(0, middleIndex));
+      
+      // Add the middle value to the new tree after building subtrees
+      newTree.insert(values[middleIndex]);
+  
+      buildBalancedTree(values.slice(middleIndex + 1));
+    };
+  
+    buildBalancedTree(values);
+  
     return newTree;
-  }
+}
+
+  
 }
 
 // helper function to print the tree in the console, taken from the odin project assignment

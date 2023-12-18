@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Binary Tree Visualization</title>
-</head>
-<body>
-  <div class="container">
-    <h1>Binary Tree Visualization</h1>
-    <div class="tree-container">
-      <svg id="tree-svg" width="800" height="600"></svg>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Binary Tree Visualization</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Binary Tree Visualization</h1>
+      <div class="tree-container">
+        <svg id="tree-svg" width="800" height="600"></svg>
+      </div>
+      <input type="text" id="add-value" />
+      <input type="number" name="number-input" id="number-input" />
+      <button id="add-button">Add Element</button>
+      <button id="rebalance-button">Rebalance Tree</button>
     </div>
-    <input type="text" id="add-value">
-    <button id="add-button">Add Element</button>
-    <button id="rebalance-button">Rebalance Tree</button>
-  </div>
-  <script type="module" src="script.js"></script>
-</body>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
