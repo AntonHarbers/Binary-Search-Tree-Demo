@@ -1,6 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'M PLUS 1 Code', monospace;
+  user-select: none;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #5a5a5a;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,12 +16,85 @@ body {
   margin: 0;
 }
 
+button,
+#rebalance-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  font-size: 1.5rem;
+  min-width: 200px;
+}
+
+input {
+  padding: 10px 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  font-size: 1.5rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+input:hover {
+  border-color: #007bff;
+}
+
+button:hover,
+#rebalance-button:hover {
+  background-color: #0056b3;
+}
+
+button:active,
+#rebalance-button:active {
+  background-color: #88b8e9;
+}
+
+h1 {
+  color: #ffffff;
+  font-size: 3.5rem;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 1);
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  min-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+svg {
+  border: 0px solid #ccc;
+  max-width: 100%;
+  color: white;
+  margin: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+text,
+.text {
+  stroke: white;
+  fill: white;
+}
+
 .container {
   text-align: center;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 20px rgba(255, 255, 255, 1);
 }
 
 .tree-container {
@@ -23,34 +104,7 @@ body {
   margin-bottom: 20px;
 }
 
-svg {
-  border: 1px solid #ccc;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  color: white;
-}
-
-.text{
-  fill: white;
-  stroke: white;
-}
-
-text{
-  stroke: white;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin: 0 10px;
-}
-
-button:hover {
-  background-color: #0056b3;
+.node {
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
 }
