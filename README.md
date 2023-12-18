@@ -4,7 +4,7 @@ Implemenation of a binary search tree for the odin project.
 
 Currently working on a visualization of the different functionality.
 
-[Live Link]()
+[Live Link](https://antonharbers.github.io/Binary-Search-Tree-Demo/)
 
 ![Repo Image](/images/repoImage.png)
 
