@@ -1,10 +1,10 @@
-import { Tree } from '../bst.js';
+import { Tree, prettyPrint } from '../bst.js';
 
 const svgElement = document.querySelector('#tree-svg');
 const addButton = document.querySelector('#add-button');
 const rebalanceButton = document.querySelector('#rebalance-button');
 
-const tree = new Tree([]);
+let tree = new Tree([]);
 
 function renderTree(rootNode, svgElement) {
     svgElement.innerHTML = ''; // Clear the SVG content
@@ -27,18 +27,19 @@ function renderTree(rootNode, svgElement) {
       text.setAttribute('y', y);
       text.setAttribute('dy', '0.3em');
       text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('class', 'text')
       text.textContent = node.value;
       svgElement.appendChild(text);
   
       if (node.left) {
-        const leftX = x - horizontalSpacing;
+        const leftX = x - horizontalSpacing - verticalSpacing;
         const leftY = y + verticalSpacing;
         svgElement.appendChild(drawLine(x, y + nodeRadius, leftX, leftY - nodeRadius));
         drawNode(node.left, leftX, leftY);
       }
   
       if (node.right) {
-        const rightX = x + horizontalSpacing;
+        const rightX = x + horizontalSpacing + verticalSpacing;
         const rightY = y + verticalSpacing;
         svgElement.appendChild(drawLine(x, y + nodeRadius, rightX, rightY - nodeRadius));
         drawNode(node.right, rightX, rightY);
@@ -62,18 +63,27 @@ function renderTree(rootNode, svgElement) {
   
 
 function updateTree() {
-  const values = randomArray(10, 100);
+  const values = randomArray(5, 100);
   tree.root = tree.buildTree([...new Set(values)]);
   renderTree(tree.root, svgElement);
 }
 
-function rebalanceTree() {
-  tree.root = tree.rebalance();
+function addValue(){
+  const value = document.querySelector('#add-value').value;
+  tree.insert(value);
   renderTree(tree.root, svgElement);
 }
 
-addButton.addEventListener('click', updateTree);
+function rebalanceTree() {
+  tree = tree.rebalance();
+  prettyPrint(tree.root)
+  renderTree(tree.root, svgElement);
+}
+
+addButton.addEventListener('click', addValue);
 rebalanceButton.addEventListener('click', rebalanceTree);
+
+updateTree();
 
 // Random array generator
 function randomArray(length, max) {

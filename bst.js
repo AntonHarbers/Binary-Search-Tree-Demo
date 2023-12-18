@@ -401,4 +401,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 // module.exports = { Tree, prettyPrint };
 
 // exporting for visualization
-export { Tree };
+export { Tree, prettyPrint };
